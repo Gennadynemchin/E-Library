@@ -1,6 +1,5 @@
 import os
 import json
-from http.server import HTTPServer, SimpleHTTPRequestHandler
 from livereload import Server, shell
 from dotenv import load_dotenv
 from jinja2 import Environment, FileSystemLoader, select_autoescape
@@ -8,7 +7,7 @@ from more_itertools import chunked
 
 
 with open('json/books_info.json', 'r') as file:
-    books_info = json.load(file)
+    books_info = json.load(file)['books_features']
 
 def main():
     load_dotenv()
@@ -19,7 +18,8 @@ def main():
 
     template = env.get_template('template.html')
     rendered_page = template.render(
-            books_info=books_info['books_features']
+            books_info=list(chunked(books_info, 2))
+
     )
 
     with open('index.html', 'w', encoding="utf8") as file:
