@@ -42,7 +42,7 @@ def main():
     )
     os.makedirs('pages', exist_ok=True)
     template = env.get_template('template.html')
-    books_for_pages = list(chunked(get_books_info('json/books_info.json'), 10))
+    books_for_pages = list(chunked(get_books_info('json/books_info.json'), 80))
 
     for count, value in enumerate(books_for_pages):
         rendered_page = template.render(

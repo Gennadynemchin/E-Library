@@ -19,40 +19,41 @@
     <script src="https://cdn.jsdelivr.net/npm/bootstrap@4.5.3/dist/js/bootstrap.bundle.min.js"
             integrity="sha384-ho+j7jyWK8fNQe+A12Hb8AhRq26LrZ/JpcUGGOn+Y7RsweNrtN/tE3MoK7ZeZDyx"
             crossorigin="anonymous"></script>
-
-
     <div class="container">
       <nav aria-label="Page navigation example">
-
-        <ul class="pagination">
+        <ul class="pagination justify-content-center">
           {% if current_page == 0 %}
-          <li class="page-item disabled">
-      <a class="page-link" href="#" tabindex="-1" aria-disabled="true">Previous</a>
-    </li>
+            <li class="page-item disabled">
+              <a class="page-link" href="#" tabindex="-1" aria-disabled="true">Previous</a>
+            </li>
           {% else %}
-          <li class="page-item"><a class="page-link" href="index{{ current_page }}.html">Previous</a></li>
+            <li class="page-item">
+              <a class="page-link" href="index{{ current_page }}.html">Previous</a>
+            </li>
           {% endif %}
-        {% for page_num in range(total_pages) %}
-        {% if current_page == page_num %}
-        <li class="page-item active" aria-current="page">
-      <a class="page-link" href="index{{ page_num+1 }}.html">{{ page_num+1 }}<span class="sr-only">(current)</span></a>
-    </li>
-        {% else %}
-        <li class="page-item"><a class="page-link" href="index{{ page_num+1 }}.html">{{ page_num+1 }}</a></li>
-        {% endif %}
-        {% endfor %}
-
+          {% for page_num in range(total_pages) %}
+            {% if current_page == page_num %}
+              <li class="page-item active" aria-current="page">
+                <a class="page-link" href="index{{ page_num+1 }}.html">{{ page_num+1 }}<span class="sr-only">(current)</span></a>
+              </li>
+            {% else %}
+              <li class="page-item">
+                <a class="page-link" href="index{{ page_num+1 }}.html">{{ page_num+1 }}</a>
+              </li>
+            {% endif %}
+          {% endfor %}
           {% if current_page+1 == total_pages %}
-          <li class="page-item disabled"><a class="page-link" href="#" tabindex="-1" aria-disabled="true">Next</a></li>
-
-
+            <li class="page-item disabled">
+              <a class="page-link" href="#" tabindex="-1" aria-disabled="true">Next</a>
+            </li>
           {% else %}
-      <li class="page-item"><a class="page-link" href="index{{ current_page+2 }}.html">Next</a></li>
+            <li class="page-item">
+              <a class="page-link" href="index{{ current_page+2 }}.html">Next</a>
+            </li>
           {% endif %}
-      </ul>
-
-    </nav>
-      <div class="card mb-3" style="max-width: 840px;">
+        </ul>
+      </nav>
+      <div class="card mx-auto mt-5" style="max-width: 840px;">
         <div class="row no-gutters">
           <div class="container">
             {% for books in books_info %}
@@ -67,17 +68,16 @@
                         <h5 class="card-title">{{ book.title }}</h5>
                         <p class="card-text">{{ book.author }}</p>
                         <a href={{ book.book_path|urlencode }}>Читать</a>
-                          <!-- <small class="text-muted">Last updated 888 mins ago</small> -->
-                        </p>
-                      </div>
+                      </p>
                     </div>
                   </div>
-                {% endfor %}
-              </div>
-            {% endfor %}
-          </div>
+                </div>
+              {% endfor %}
+            </div>
+          {% endfor %}
         </div>
       </div>
     </div>
-  </body>
+  </div>
+</body>
 </html>
