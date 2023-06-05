@@ -6,9 +6,9 @@ from jinja2 import Environment, FileSystemLoader, select_autoescape
 from more_itertools import chunked
 
 
-def get_books_info(file):
+def get_books_info(json_file):
     books_features = []
-    with open(file, 'r') as file:
+    with open(json_file, 'r') as file:
         for book in json.load(file)["books_features"]:
             content = {
                 "title": book["title"],
@@ -21,6 +21,18 @@ def get_books_info(file):
             books_features.append(content)
     return books_features
 
+'''
+def create_pages(template, books_info):
+    os.makedirs('pages', exist_ok=True)
+    print(len(books_info))
+    for count, books in enumerate(books_info):
+        rendered_page = template.render(
+                books_info=list(chunked(books, 2)),
+                page_numbers=count)
+        with open(os.path.join('pages', f'index{count+1}.html'), 'w', encoding="utf8") as file:
+            file.write(rendered_page)
+        return count
+'''
 
 def main():
     load_dotenv()
@@ -34,15 +46,16 @@ def main():
 
     for count, value in enumerate(books_for_pages):
         rendered_page = template.render(
-                books_info=list(chunked(value, 2))
-
+                books_info=list(chunked(value, 2)),
+                current_page=count,
+                total_pages=len(books_for_pages)
         )
-        with open(os.path.join('pages', f'index{count}.html'), 'w', encoding="utf8") as file:
+        with open(os.path.join('pages', f'index{count+1}.html'), 'w', encoding="utf8") as file:
             file.write(rendered_page)
 
     server = Server()
     server.watch('template.html', main)
-    server.serve(root='.', default_filename='./pages/index0.html')
+    server.serve(root='.', default_filename='./pages/index1.html')
 
 
 if __name__ == '__main__':
