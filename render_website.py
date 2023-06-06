@@ -1,6 +1,6 @@
 import os
 import json
-from livereload import Server, shell
+from livereload import Server
 from dotenv import load_dotenv
 from jinja2 import Environment, FileSystemLoader, select_autoescape
 from more_itertools import chunked
@@ -21,18 +21,6 @@ def get_books_info(json_file):
             books_features.append(content)
     return books_features
 
-'''
-def create_pages(template, books_info):
-    os.makedirs('pages', exist_ok=True)
-    print(len(books_info))
-    for count, books in enumerate(books_info):
-        rendered_page = template.render(
-                books_info=list(chunked(books, 2)),
-                page_numbers=count)
-        with open(os.path.join('pages', f'index{count+1}.html'), 'w', encoding="utf8") as file:
-            file.write(rendered_page)
-        return count
-'''
 
 def main():
     load_dotenv()
