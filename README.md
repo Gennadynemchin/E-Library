@@ -4,7 +4,7 @@ The online library that stored books which has been downloaded by [tululu parser
 
 The static version is deployed on Github Pages:
 
-[GitHub Pages links](https://gennadynemchin.github.io/E-Library/pages/index1.html)
+[GitHub Pages link](https://gennadynemchin.github.io/E-Library/pages/index1.html)
 
 ### How to use
 
