@@ -19,7 +19,7 @@
     <script src="https://cdn.jsdelivr.net/npm/bootstrap@4.5.3/dist/js/bootstrap.bundle.min.js"
             integrity="sha384-ho+j7jyWK8fNQe+A12Hb8AhRq26LrZ/JpcUGGOn+Y7RsweNrtN/tE3MoK7ZeZDyx"
             crossorigin="anonymous"></script>
-    <div class="container">
+    <div class="container mt-4">
       <nav aria-label="Page navigation example">
         <ul class="pagination justify-content-center">
           {% if current_page == 0 %}
@@ -53,31 +53,36 @@
           {% endif %}
         </ul>
       </nav>
-      <div class="card mx-auto mt-5" style="max-width: 840px;">
-        <div class="row no-gutters">
-          <div class="container">
-            {% for books in books_info %}
-              <div class="row">
-                {% for book in books %}
-                  <div class="col">
-                    <div class="col-md-4">
-                      <img src={{ book.img_src|urlencode }} class="card-img" alt={{ book.title }}>
-                    </div>
-                    <div class="col-md-8">
-                      <div class="card-body">
-                        <h5 class="card-title">{{ book.title }}</h5>
-                        <p class="card-text">{{ book.author }}</p>
-                        <a href={{ book.book_path|urlencode }}>Читать</a>
+    </div>
+    <div class="container">
+      <div class="row">
+        {% for books in books_info %}
+          {% for book in books %}
+            <div class="col">
+              <div class="card mb-3" style="max-width: 540px;">
+                <div class="row no-gutters">
+                  <div class="col-md-4">
+                    <img src="{{ book.img_src|urlencode }}"
+                         class="card-img"
+                         alt="{{ book.title }}">
+                  </div>
+                  <div class="col-md-8">
+                    <div class="card-body">
+                      <h4 class="card-title">{{ book.title }}</h4>
+                      <h5 class="card-text">{{ book.author }}</h5>
+                      <p>
+                        {% for genre in book.genres %}<a href="#" class="badge badge-light">{{ genre }}</a>{% endfor %}
                       </p>
+                      <a href="{{ book.book_path|urlencode }}" target="_blank">Читать</a>
                     </div>
                   </div>
                 </div>
-              {% endfor %}
+              </div>
             </div>
           {% endfor %}
-        </div>
+          <div class="w-100"></div>
+        {% endfor %}
       </div>
     </div>
-  </div>
-</body>
+  </body>
 </html>
