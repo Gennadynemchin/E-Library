@@ -37,3 +37,7 @@ Run:
 python render_website.py
 ```
 Pages will be generated and placed into `pages` directory
+
+- Follow to the first page:
+
+http://127.0.0.1:5500/pages/index1.html
