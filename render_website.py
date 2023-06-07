@@ -12,7 +12,7 @@ import json
 
 def get_books_info(json_file):
     books_features = []
-    with open(json_file, 'r') as file:
+    with open(json_file, "r") as file:
         for book in json.load(file)["books_features"]:
             content = {
                 "title": book["title"],
@@ -29,12 +29,12 @@ def get_books_info(json_file):
 def main():
     load_dotenv()
     env = Environment(
-        loader=FileSystemLoader('.'),
-        autoescape=select_autoescape(['html', 'xml'])
+        loader=FileSystemLoader("."),
+        autoescape=select_autoescape(["html", "xml"])
     )
-    os.makedirs('pages', exist_ok=True)
-    template = env.get_template('template.html')
-    books_for_pages = list(chunked(get_books_info('json/books_info.json'), 80))
+    os.makedirs("pages", exist_ok=True)
+    template = env.get_template("template.html")
+    books_for_pages = list(chunked(get_books_info("json/books_info.json"), 80))
 
     for count, value in enumerate(books_for_pages):
         rendered_page = template.render(
@@ -42,13 +42,13 @@ def main():
             current_page=count,
             total_pages=len(books_for_pages)
         )
-        with open(os.path.join('pages', f'index{count + 1}.html'), 'w', encoding="utf8") as file:
+        with open(os.path.join("pages", f"index{count + 1}.html"), "w", encoding="utf8") as file:
             file.write(rendered_page)
 
     server = Server()
-    server.watch('template.html', main)
-    server.serve(root='.', default_filename='./pages/index1.html')
+    server.watch("template.html", main)
+    server.serve(root=".", default_filename="./pages/index1.html")
 
 
-if __name__ == '__main__':
+if __name__ == "__main__":
     main()
