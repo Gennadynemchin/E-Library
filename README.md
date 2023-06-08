@@ -32,10 +32,17 @@ pip install -r requierements.txt
 Put json file with books info to `json` directory. Book's text and covers should be placed in `media/books`
 and `media/images`
 
-Run:
+Run in terminal:
 ```commandline
 python render_website.py
 ```
+Use additional command to get info from another ```.json``` file. By default
+all books information placed in ```json/books_info.json```. You can run the website
+by running command with following parameter:
+```commandline
+python render_website.py --json_path <PATH_TO_JSON_FILE>
+```
+
 Pages will be generated and placed into `pages` directory
 
 - Either follow to the first page:
